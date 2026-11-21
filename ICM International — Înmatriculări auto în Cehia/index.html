@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050505">
+<title>ICM International — Înmatriculări auto în Cehia</title>
+<meta name="description" content="ICM International: înmatriculăm mașini din toată Europa în Cehia, legal, fără impozit auto anual. Consultanță în impozite și taxe auto. 0742 625 411.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Cinzel:wght@500&family=Italiana&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Big Shoulders Display";font-style:normal;font-display:swap;font-weight:100 900;src:url(fonts/big-shoulders-display-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Big Shoulders Display";font-style:normal;font-display:swap;font-weight:100 900;src:url(fonts/big-shoulders-display-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Big Shoulders Text";font-style:normal;font-display:swap;font-weight:100 900;src:url(fonts/big-shoulders-text-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Big Shoulders Text";font-style:normal;font-display:swap;font-weight:100 900;src:url(fonts/big-shoulders-text-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+  --bg:#1b130d;--bg2:#22180f;--card:#241a11;--deep:#120c08;--line:rgba(239,228,208,.12);--line2:rgba(239,228,208,.26);
+  --text:#efe4d0;--mute:#a8957c;--gold:#d8c3a0;--gold2:#f3e8d4;--gold3:#7d6448;--red:#c8392b;
+  --serif:"Big Shoulders Display",sans-serif;--disp:"Big Shoulders Display",sans-serif;--sans:"Big Shoulders Text",sans-serif;--mono:"Big Shoulders Text",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;font-size:17.5px;line-height:1.55;letter-spacing:.01em;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:500;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img{display:block;max-width:100%}
+.wrap{width:min(1280px,90vw);margin:0 auto}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px}
+.eyebrow:before{content:"";width:34px;height:1px;background:var(--gold)}
+em.g{font-style:italic;color:var(--gold2)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--gold);color:#000;padding:8px 14px;z-index:999}
+.skip:focus{left:8px}
+.gold-text{background:linear-gradient(100deg,#8a6d36,#ecd9ae 35%,#c9a96a 55%,#f6e7c3 75%,#8a6d36);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* loader */
+#loader{position:fixed;inset:0;background:#000;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;transition:opacity 1s ease,visibility 1s}
+#loader.done{opacity:0;visibility:hidden}
+#loader .lg{font-family:var(--disp);font-size:clamp(40px,6vw,74px);letter-spacing:.3em;padding-left:.3em}
+#loader .bar{width:200px;height:1px;background:var(--line2);overflow:hidden}
+#loader .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .1s linear}
+
+/* header */
+header{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .5s,border-color .5s;border-bottom:1px solid transparent}
+header.solid{background:rgba(5,5,5,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:84px}
+.logo{display:flex;align-items:center;gap:14px}
+.logo .mk{width:44px;height:44px;border:1px solid var(--gold);display:grid;place-items:center;font-family:var(--disp);font-size:14px;color:var(--gold2);letter-spacing:.08em;transform:rotate(45deg)}
+.logo .mk span{transform:rotate(-45deg)}
+.logo b{font-family:"Cinzel",serif;font-weight:500;letter-spacing:.28em;font-size:14px}
+.logo small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.3em;color:var(--mute);margin-top:2px}
+.links{display:flex;align-items:center;gap:34px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#cfc8bb}
+.links a{position:relative;padding:6px 0}
+.links a:after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .5s cubic-bezier(.7,0,.2,1)}
+.links a:hover:after{transform:scaleX(1);transform-origin:left}
+.icons{display:flex;gap:10px;align-items:center}
+.ic{width:40px;height:40px;border:1px solid var(--line2);border-radius:50%;display:grid;place-items:center;transition:.3s}
+.ic:hover{border-color:var(--gold);color:var(--gold2)}
+.ic svg{width:15px;height:15px}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:16px 28px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:400;transition:.4s;white-space:nowrap;position:relative;overflow:hidden}
+.btn-gold{background:linear-gradient(120deg,#a8874a,#e6cf9c 50%,#a8874a);background-size:200% 100%;color:#0a0805}
+.btn-gold:hover{background-position:100% 0}
+.btn-line{border:1px solid var(--line2);color:var(--gold2)}
+.btn-line:hover{border-color:var(--gold);background:rgba(201,169,106,.06)}
+.btn svg{width:14px;height:14px}
+.burger{display:none;width:44px;height:44px;border:1px solid var(--line2);border-radius:50%;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.burger i{width:16px;height:1px;background:var(--text);display:block}
+#mmenu{position:fixed;inset:0;background:#050505;z-index:150;padding:120px 7vw 40px;display:flex;flex-direction:column;transform:translateY(-100%);transition:transform .8s cubic-bezier(.7,0,.2,1)}
+#mmenu.open{transform:none}
+#mmenu a.mi{font-family:var(--disp);font-size:40px;border-bottom:1px solid var(--line);padding:12px 0;display:flex;gap:18px;align-items:baseline}
+#mmenu a.mi span{font-family:var(--mono);font-size:11px;color:var(--gold)}
+#mclose{position:absolute;top:20px;right:5vw;width:44px;height:44px;border:1px solid var(--line2);border-radius:50%;font-size:18px}
+
+/* HERO — Rolls sequence */
+.hero{height:320vh;position:relative}
+.hero-stick{position:sticky;top:0;height:100vh;overflow:hidden;background:#000}
+.hero-bg{position:absolute;inset:-40px;background:url(img/phantom.jpg) center/cover;filter:blur(40px) brightness(.25) saturate(.7);transform:scale(1.1)}
+.car-frame{--W:max(100vw,calc(100vh * 1.637));position:absolute;left:var(--cx,58%);width:var(--W);height:calc(var(--W) / 1.637);top:calc(50vh - var(--W) / 1.637 / 2);transform:translateX(-50%);transform-origin:50% 60%;will-change:transform}
+.car-frame img{width:100%;height:100%;object-fit:cover;filter:brightness(var(--br,.12)) contrast(1.08) saturate(.9);transition:filter .2s linear}
+.car-frame:before,.car-frame:after{display:none}
+.car-frame:before{left:0;background:linear-gradient(90deg,#000,transparent)}
+.car-frame:after{right:0;background:linear-gradient(270deg,#000,transparent)}
+.car-frame .fade-b{position:absolute;left:0;right:0;bottom:0;height:10%;background:linear-gradient(0deg,#000,transparent);z-index:2}
+.car-frame .fade-t{position:absolute;left:0;right:0;top:0;height:8%;background:linear-gradient(180deg,#000,transparent);z-index:2}
+.lamp{position:absolute;z-index:3;border-radius:50%;mix-blend-mode:screen;opacity:0;transition:opacity .9s ease;pointer-events:none}
+.lamp.drl{background:radial-gradient(closest-side,#fff 0,#fff8e8 35%,rgba(255,240,210,.5) 60%,transparent)}
+.lamp.flare{background:radial-gradient(closest-side,rgba(255,250,235,.95),rgba(255,236,200,.35) 40%,transparent 72%)}
+.lamp.beam{background:radial-gradient(closest-side,rgba(255,244,220,.35),transparent 70%);filter:blur(6px)}
+.hero[data-l="1"] .lamp.drl{opacity:1}
+.hero[data-l="2"] .lamp{opacity:1}
+.hero[data-l="2"] .lamp.flare{animation:flick 4s ease-in-out infinite}
+@keyframes flick{50%{opacity:.85}}
+.hero-copy{position:absolute;left:5vw;bottom:12vh;z-index:5;max-width:90vw}
+.hero-copy .eyebrow{margin-bottom:26px}
+.hero h1{font-size:clamp(56px,8.6vw,138px);line-height:.92;font-weight:400;letter-spacing:-.01em;transition:letter-spacing .6s,opacity .3s;font-family:var(--disp)}
+.hero h1 .l2{display:block;font-style:italic;white-space:nowrap}
+.hero p.lead{max-width:44ch;color:#c9c1b2;font-size:16.5px;margin:30px 0 36px;opacity:var(--lo,0);transform:translateY(calc((1 - var(--lo,0))*20px));transition:opacity .4s}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.font-tag{position:absolute;right:5vw;bottom:5vh;z-index:5;text-align:right}
+.font-tag b{display:block;font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.2em;color:var(--gold)}
+.progress{position:absolute;left:5vw;right:5vw;bottom:5vh;height:1px;background:var(--line);z-index:5;max-width:280px}
+.progress i{display:block;height:100%;width:var(--p,0%);background:var(--gold)}
+.hint{position:absolute;top:50%;left:5vw;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;gap:12px}
+.hint span{width:1px;height:60px;background:linear-gradient(var(--gold),transparent)}
+
+/* ticker */
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:22px 0;white-space:nowrap;background:#070605}
+.track{display:inline-flex;gap:60px;animation:tick 50s linear infinite;padding-left:60px}
+.track span{font-family:var(--serif);font-style:italic;font-size:34px;display:inline-flex;align-items:center;gap:60px;color:#ddd5c6}
+.track span:after{content:"";width:8px;height:8px;border:1px solid var(--gold);transform:rotate(45deg)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* sections */
+.sec{padding:150px 0;position:relative}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:70px;flex-wrap:wrap}
+.sh .eyebrow{margin-bottom:24px}
+.sh h2{font-family:var(--disp);font-weight:400;font-size:clamp(42px,5.8vw,86px);line-height:1;letter-spacing:-.015em;max-width:15ch}
+.sh p{max-width:38ch;color:var(--mute);font-size:15.5px}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1.2s cubic-bezier(.2,.7,.2,1),transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.hair{height:1px;background:linear-gradient(90deg,transparent,var(--gold3),transparent);border:0}
+
+/* law */
+.law{display:grid;grid-template-columns:1.05fr 1fr;gap:90px;align-items:center}
+.law .big{font-family:var(--serif);font-weight:300;font-size:clamp(30px,3.3vw,48px);line-height:1.18}
+.law .big em{color:var(--gold2)}
+.law p.t{color:#a9a194;margin-top:30px;max-width:52ch;font-size:15.5px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:50px;border-top:1px solid var(--line2)}
+.stats div{padding:26px 20px 0 0}
+.stats b{display:block;font-family:var(--disp);font-weight:400;font-size:52px;line-height:1}
+.stats span{font-size:12.5px;color:var(--mute);display:block;margin-top:8px}
+.photo{position:relative;overflow:hidden;aspect-ratio:4/5}
+.photo img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 2s cubic-bezier(.2,.7,.2,1);filter:brightness(.85) contrast(1.05)}
+.photo.in img{transform:scale(1)}
+.photo:after{content:"";position:absolute;inset:14px;border:1px solid rgba(236,217,174,.35);pointer-events:none}
+.photo figcaption{position:absolute;left:30px;bottom:26px;z-index:2}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line2);border-left:1px solid var(--line)}
+.sv{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:42px 36px 38px;position:relative;transition:background .5s;min-height:300px;display:flex;flex-direction:column}
+.sv:hover{background:linear-gradient(180deg,rgba(201,169,106,.07),transparent)}
+.sv .n{font-family:var(--disp);font-style:italic;font-size:22px;color:var(--gold)}
+.sv h3{font-family:var(--disp);font-weight:400;font-size:28px;line-height:1.1;margin:44px 0 14px}
+.sv p{color:var(--mute);font-size:14.5px}
+.sv .arr{margin-top:auto;padding-top:26px;font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold2);opacity:0;transform:translateX(-8px);transition:.5s}
+.sv:hover .arr{opacity:1;transform:none}
+
+/* why */
+.why{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
+.bars{border:1px solid var(--line);padding:36px;background:var(--card)}
+.bars .row{display:grid;grid-template-columns:120px 1fr 70px;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.bars .row:last-child{border:0}
+.bars .row .lbl{font-size:13px;color:#d3ccbf}
+.bars .row .track2{height:2px;background:rgba(255,255,255,.06)}
+.bars .row .fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold3),var(--gold2));transition:width 1.4s cubic-bezier(.2,.7,.2,1);position:relative}
+.bars .row .fill:after{content:"";position:absolute;right:-4px;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--gold2);box-shadow:0 0 12px var(--gold)}
+.bars .row .v{font-family:var(--mono);font-size:12px;text-align:right;color:var(--gold2)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+.chip{padding:9px 16px;border:1px solid var(--line2);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);transition:.3s}
+.chip.on{background:var(--gold2);color:#0a0805;border-color:var(--gold2)}
+.chip:hover{border-color:var(--gold);color:var(--gold2)}
+.chip.on:hover{color:#0a0805}
+.layers{display:flex;flex-direction:column}
+.layer{border-top:1px solid var(--line2);padding:24px 0;cursor:pointer}
+.layer:last-child{border-bottom:1px solid var(--line2)}
+.layer .hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.layer .hd b{font-family:var(--disp);font-weight:400;font-size:24px;transition:color .3s}
+.layer:hover .hd b,.layer.on .hd b{color:var(--gold2)}
+.layer .hd span{font-family:var(--mono);font-size:11.5px;color:var(--gold)}
+.layer .bd{max-height:0;overflow:hidden;transition:max-height .6s ease;color:var(--mute);font-size:14.5px}
+.layer.on .bd{max-height:240px}
+.layer .bd p{padding-top:14px;max-width:52ch}
+
+/* ENGINE configurator */
+.eng-wrap{display:grid;grid-template-columns:1.55fr 1fr;gap:0;border:1px solid var(--line2);background:#000;min-height:620px}
+.eng-pic{position:relative;overflow:hidden;background:#000}
+.eng-pic img{width:100%;height:100%;object-fit:cover;filter:brightness(.78) contrast(1.1);transition:filter .8s,transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.eng-wrap.picked .eng-pic img{filter:brightness(.5) contrast(1.1);transform:scale(1.06)}
+.eng-pic .vig{position:absolute;inset:0;background:radial-gradient(70% 70% at 55% 45%,transparent 40%,rgba(0,0,0,.85));pointer-events:none}
+.eng-pic .tl{position:absolute;left:28px;top:26px;z-index:3}
+.eng-pic .tl b{display:block;font-family:var(--disp);font-weight:400;font-size:clamp(26px,2.6vw,38px);line-height:1.05;margin-top:10px;max-width:14ch}
+.hs{position:absolute;z-index:4;transform:translate(-50%,-50%);display:flex;align-items:center;gap:10px}
+.hs .dot{width:14px;height:14px;border-radius:50%;background:var(--gold2);box-shadow:0 0 0 0 rgba(236,217,174,.6);animation:ring 2.2s infinite;flex:0 0 14px}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(236,217,174,.6)}70%{box-shadow:0 0 0 16px rgba(236,217,174,0)}100%{box-shadow:0 0 0 0 rgba(236,217,174,0)}}
+.hs .pill{padding:9px 16px;background:rgba(8,7,5,.78);backdrop-filter:blur(8px);border:1px solid rgba(236,217,174,.45);font-family:var(--disp);font-size:20px;letter-spacing:.06em;transition:.35s;line-height:1}
+.hs .pill small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--mute);margin-top:4px}
+.hs:hover .pill,.hs.on .pill{background:var(--gold2);color:#0a0805;border-color:var(--gold2)}
+.hs:hover .pill small,.hs.on .pill small{color:#3b2f1a}
+.eng-wrap.picked .hs:not(.on){opacity:.55}
+.quiz{border-left:1px solid var(--line2);padding:40px 38px;display:flex;flex-direction:column;background:linear-gradient(180deg,#0e0c09,#060504);position:relative}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+.qdots{display:flex;gap:6px}
+.qdots i{width:22px;height:2px;background:var(--line2);transition:.4s}
+.qdots i.on{background:var(--gold2)}
+.qstep{display:none;flex-direction:column;gap:18px;animation:qin .7s cubic-bezier(.2,.7,.2,1)}
+.qstep.on{display:flex}
+@keyframes qin{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+.qstep h3{font-family:var(--disp);font-weight:400;font-size:clamp(28px,2.6vw,38px);line-height:1.08}
+.qstep p.s{color:var(--mute);font-size:14px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{border:1px solid var(--line2);padding:15px 16px;text-align:left;font-size:14px;transition:.3s;color:#ddd5c6}
+.opt small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mute);margin-top:4px;text-transform:uppercase}
+.opt:hover{border-color:var(--gold);background:rgba(201,169,106,.06)}
+.opt.on{border-color:var(--gold2);background:rgba(236,217,174,.1)}
+.field label{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#cfc8bb;margin-bottom:16px}
+.field label b{font-family:var(--disp);font-weight:400;font-size:28px;letter-spacing:0;text-transform:none;color:var(--gold2)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:1px;background:var(--line2);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--gold2);transform:rotate(45deg);cursor:pointer;border:4px solid #0a0805;box-shadow:0 0 0 1px var(--gold2)}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;background:var(--gold2);border:4px solid #0a0805;cursor:pointer;border-radius:0}
+.qnav{margin-top:auto;padding-top:28px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.qback{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
+.qback:hover{color:var(--gold2)}
+.qempty{margin:auto 0;display:flex;flex-direction:column;gap:20px}
+.qempty .big{font-family:var(--disp);font-size:clamp(34px,3vw,46px);line-height:1.05}
+.res .cmp{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2)}
+.res .cmp div{padding:18px 0}
+.res .cmp div+div{border-left:1px solid var(--line2);padding-left:18px}
+.res .cmp span{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--mute);text-transform:uppercase}
+.res .cmp b{display:block;font-family:var(--disp);font-weight:400;font-size:clamp(26px,2.4vw,36px);line-height:1.1;margin-top:6px}
+.res .save b{display:block;font-family:var(--disp);font-weight:400;font-size:clamp(46px,4.8vw,72px);line-height:1}
+.note{font-size:11.5px;color:var(--mute)}
+
+/* garage */
+.cars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.car{background:var(--bg);cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.car .pic{aspect-ratio:4/3;position:relative;overflow:hidden;background:#0b0a08}
+.car .pic img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.7,.2,1),filter .6s;filter:brightness(.82)}
+.car:hover .pic img{transform:scale(1.06);filter:brightness(1)}
+.plate{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:radial-gradient(70% 60% at 50% 55%,#1c1811,#070605 75%)}
+.plate:before{content:"";position:absolute;inset:16px;border:1px solid var(--line2)}
+.plate .cyl{font-family:var(--disp);font-size:clamp(70px,8vw,120px);line-height:.9;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.car:hover .plate .cyl{transform:scale(1.06)}
+.plate .bn{font-family:"Cinzel",serif;letter-spacing:.42em;font-size:11px;color:var(--gold);padding-left:.42em}
+.car .num{position:absolute;top:22px;left:24px;font-family:var(--mono);font-size:10px;color:var(--gold2);letter-spacing:.2em;z-index:2}
+.car .body{padding:26px 28px 28px}
+.car .brand{font-family:"Cinzel",serif;font-size:11px;color:var(--gold);letter-spacing:.3em;text-transform:uppercase}
+.car h3{font-family:var(--disp);font-weight:400;font-size:30px;line-height:1.05;margin:8px 0 16px}
+.car .spec{display:flex;gap:18px;font-size:12.5px;color:var(--mute);flex-wrap:wrap}
+.car .spec b{color:var(--text);font-weight:400}
+.car .sav{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.car .sav b{color:var(--gold2);font-family:var(--disp);font-weight:400;font-size:22px;letter-spacing:0;text-transform:none}
+.car.hide{display:none}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:30px}
+
+/* gallery strip */
+.strip{display:grid;grid-template-columns:1.3fr 1fr;gap:1px;background:var(--line)}
+.strip figure{position:relative;overflow:hidden;aspect-ratio:16/10;background:#000}
+.strip img{width:100%;height:100%;object-fit:cover;filter:brightness(.8)}
+.strip figcaption{position:absolute;left:26px;bottom:22px}
+.strip figcaption b{display:block;font-family:var(--disp);font-weight:400;font-size:30px;margin-top:6px}
+
+/* articles */
+.arts{display:grid;grid-template-columns:repeat(3,1fr);gap:50px}
+.art{display:flex;flex-direction:column;gap:16px;border-top:1px solid var(--line2);padding-top:28px}
+.art h3{font-family:var(--disp);font-weight:400;font-size:30px;line-height:1.08}
+.art p{color:#a39b8d;font-size:15px}
+.faq{margin-top:100px;border-top:1px solid var(--line2)}
+.q{border-bottom:1px solid var(--line2)}
+.q button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:30px 0;text-align:left;font-family:var(--disp);font-size:clamp(20px,2vw,26px)}
+.q button i{width:34px;height:34px;flex:0 0 34px;border:1px solid var(--line2);border-radius:50%;display:grid;place-items:center;font-style:normal;transition:.4s;color:var(--gold);font-family:var(--sans)}
+.q.on button i{transform:rotate(45deg);border-color:var(--gold)}
+.q .a{max-height:0;overflow:hidden;transition:max-height .6s;color:var(--mute)}
+.q.on .a{max-height:300px}
+.q .a p{padding:0 50px 30px 0;max-width:80ch}
+
+/* contact */
+.newf{border:1px solid var(--line2);padding:70px;background:linear-gradient(140deg,#13100b,#050505 60%);display:grid;grid-template-columns:1fr 1fr;gap:70px;position:relative}
+.newf:before{content:"";position:absolute;inset:12px;border:1px solid var(--line);pointer-events:none}
+.newf h2{font-family:var(--disp);font-weight:400;font-size:clamp(44px,5vw,74px);line-height:1}
+.st3{display:flex;flex-direction:column;gap:22px;margin-top:40px}
+.st3 div{display:flex;gap:20px}
+.st3 span{font-family:var(--disp);font-style:italic;font-size:22px;color:var(--gold);line-height:1.2}
+.st3 b{display:block;font-weight:400;font-size:16px}
+.st3 p{color:var(--mute);font-size:14px}
+form .in{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line2);padding:18px 2px;color:var(--text);font:inherit;font-size:15px;margin-bottom:8px;outline:none;transition:.3s}
+form .in:focus{border-color:var(--gold2)}
+form .in::placeholder{color:#6e685d}
+form textarea.in{min-height:110px;resize:vertical}
+form .two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.ok{display:none;margin-top:14px;font-size:13.5px;color:var(--gold2)}
+
+.closing{text-align:center;padding:170px 0;position:relative;overflow:hidden}
+.closing h2{font-family:var(--disp);font-weight:400;font-size:clamp(64px,11vw,180px);line-height:.9;letter-spacing:-.02em}
+.closing p{color:var(--mute);margin:30px auto 40px;max-width:44ch}
+
+footer{border-top:1px solid var(--line);padding:80px 0 36px;background:#030303}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px}
+.fgrid h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;color:var(--gold);font-weight:400;text-transform:uppercase;margin-bottom:20px}
+.fgrid a{display:block;color:#b5ad9f;font-size:14px;margin-bottom:11px}
+.fgrid a:hover{color:var(--gold2)}
+.fgrid p{color:var(--mute);font-size:14px;max-width:34ch;margin-top:22px}
+.legal{margin-top:70px;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11.5px;color:var(--mute)}
+
+/* modal */
+#modal{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:4vw;opacity:0;visibility:hidden;transition:.45s}
+#modal.open{opacity:1;visibility:visible}
+.mbox{width:min(1100px,100%);max-height:92vh;overflow:auto;background:#080706;border:1px solid var(--line2);display:grid;grid-template-columns:1.2fr 1fr}
+.mpic{position:relative;min-height:380px;background:#0b0a08}
+.mpic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mpic .plate{position:absolute}
+.mtxt{padding:44px;display:flex;flex-direction:column;gap:16px}
+.mtxt h3{font-family:var(--disp);font-weight:400;font-size:46px;line-height:1}
+.mtxt p{color:#a9a194;font-size:15px}
+.kv{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line2)}
+.kv div{padding:14px 0;border-bottom:1px solid var(--line)}
+.kv div:nth-child(odd){padding-right:14px}
+.kv span{display:block;font-size:10px;color:var(--mute);font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase}
+.kv b{font-weight:400;font-size:16px}
+.kv .gold b{color:var(--gold2)}
+.mnav{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px;gap:10px;flex-wrap:wrap}
+.mnav .arrows{display:flex;gap:8px}
+#mclose2{position:absolute;top:18px;left:18px;width:42px;height:42px;border:1px solid var(--line2);border-radius:50%;background:rgba(0,0,0,.6);font-size:16px;z-index:3}
+
+.wa{position:fixed;right:24px;bottom:24px;z-index:90;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#a8874a,#ecd9ae);color:#0a0805;display:grid;place-items:center;box-shadow:0 10px 30px rgba(201,169,106,.3);transition:.4s}
+.wa:hover{transform:scale(1.07)}
+.wa svg{width:24px;height:24px}
+
+@media (max-width:1020px){
+  .links,.icons .ic{display:none}.burger{display:flex}
+  .law,.why,.newf,.mbox,.eng-wrap,.strip{grid-template-columns:1fr}
+  .svc,.cars{grid-template-columns:1fr 1fr}
+  .arts{grid-template-columns:1fr;gap:30px}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .newf{padding:40px 28px}
+  .quiz{border-left:0;border-top:1px solid var(--line2)}
+  .eng-pic{aspect-ratio:1200/631}
+  
+  .hero-copy{max-width:90vw;bottom:9vh}
+  .font-tag{display:none}
+}
+@media (max-width:1020px){.car-frame{--cx:95%}}
+@media (max-width:640px){
+  .hero h1{font-size:8.6vw!important}
+  .svc,.cars,form .two,.opts{grid-template-columns:1fr}
+  .icons .btn{display:none}
+  .sec{padding:100px 0}
+  .stats b{font-size:36px}
+  .bars{padding:24px}
+  .bars .row{grid-template-columns:96px 1fr 56px}
+  .fgrid{grid-template-columns:1fr}
+  .hs .pill{font-size:15px;padding:7px 10px}
+  .hs .pill small{display:none}
+  .quiz{padding:30px 22px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* === Big Shoulders system === */
+h1,h2,h3,.big,.lg,b.cyl,.cyl,.stats b,.track span,.qempty .big,.layer .hd b,.q button,.res .cmp b,.res .save b,.car .sav b,.field label b,.hs .pill,.st3 span,.sv .n{font-family:var(--disp)!important;font-weight:800!important;text-transform:uppercase;font-style:normal!important;letter-spacing:-.005em}
+.sh h2,.closing h2,.newf h2{line-height:.9!important}
+em.g,.outline{font-style:normal!important;color:transparent!important;-webkit-text-stroke:1.4px var(--text);background:none!important}
+.gold-text{background:none!important;color:var(--gold2)!important;-webkit-text-fill-color:currentColor}
+.sq{display:inline-block;width:.16em;height:.16em;background:var(--red);margin-left:.04em;vertical-align:baseline}
+.mono,.eyebrow,.btn,.links,.chip,.qback,.fgrid h4,.kv span,.car .num,.car .brand,.plate .bn,.logo small{font-family:var(--mono)!important;font-weight:600;letter-spacing:.2em}
+.logo b{font-family:var(--disp)!important;font-weight:800;font-size:18px;letter-spacing:.14em}
+.logo .mk{font-family:var(--disp)!important;font-weight:800}
+.law .big{font-weight:700!important;line-height:1.02!important}
+.law .big em{font-style:normal!important;color:transparent!important;-webkit-text-stroke:1.2px var(--text)}
+.track span{font-size:40px!important;color:var(--text)!important}
+.btn-gold{background:var(--gold2)!important;color:#1b130d!important}
+.btn-gold:hover{background:#fff!important}
+.hero-stick{background:var(--deep)!important}
+.car-frame:before{background:linear-gradient(90deg,var(--deep),transparent)!important}
+.car-frame:after{background:linear-gradient(270deg,var(--deep),transparent)!important}
+.car-frame .fade-b{background:linear-gradient(0deg,var(--deep),transparent)!important}
+.car-frame .fade-t{background:linear-gradient(180deg,var(--deep),transparent)!important}
+.hero-bg{filter:blur(40px) brightness(.25) sepia(.5)!important}
+.hero h1{font-size:clamp(64px,10vw,168px)!important;line-height:.86!important}
+.ticker{background:var(--deep)!important}
+#loader{background:var(--deep)!important}
+.eng-wrap,.eng-pic{background:var(--deep)!important}
+.quiz{background:linear-gradient(180deg,#2a1e14,#1b130d)!important}
+.newf{background:linear-gradient(140deg,#2c2015,#1b130d 60%)!important}
+footer{background:var(--deep)!important}
+.mbox{background:#1d140d!important}
+.plate{background:radial-gradient(70% 60% at 50% 55%,#33261a,#1b130d 75%)!important}
+.car{background:var(--bg)!important}
+.wa{background:var(--gold2)!important;color:#1b130d!important}
+body:after{opacity:.05}
+/* de ce noi */
+.adv{border-top:1px solid var(--line2)}
+.adv-row{display:grid;grid-template-columns:110px 1fr 1.2fr;gap:40px;padding:40px 0;border-bottom:1px solid var(--line2);align-items:start}
+.adv-row .num{font-family:var(--disp);font-weight:900;font-size:64px;line-height:.85;color:transparent;-webkit-text-stroke:1.2px var(--gold)}
+.adv-row h3{font-size:clamp(28px,3vw,44px);line-height:.95}
+.adv-row p{color:#cbbba1;max-width:60ch}
+.adv-row:hover h3{color:var(--gold2)}
+/* servicii list */
+.slist{border-top:1px solid var(--line2)}
+.sitem{display:grid;grid-template-columns:110px 1fr;gap:40px;padding:56px 0;border-bottom:1px solid var(--line2)}
+.sitem .num{font-family:var(--disp);font-weight:900;font-size:64px;line-height:.85;color:var(--gold)}
+.sitem h3{font-size:clamp(34px,4vw,60px);line-height:.92;margin-bottom:22px}
+.sitem .cols{display:grid;grid-template-columns:1.3fr 1fr;gap:50px}
+.sitem p{color:#cbbba1;margin-bottom:14px}
+.sitem ul{list-style:none;border-top:1px solid var(--line)}
+.sitem li{padding:11px 0 11px 22px;border-bottom:1px solid var(--line);position:relative;color:var(--text);font-size:16px}
+.sitem li:before{content:"";position:absolute;left:0;top:19px;width:8px;height:8px;background:var(--red)}
+.sitem .k{font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);display:block;margin-bottom:10px}
+.sitem a.go{display:inline-block;margin-top:14px;font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);border-bottom:1px solid var(--gold2);padding-bottom:3px}
+@media (max-width:1020px){.adv-row{grid-template-columns:70px 1fr;gap:20px}.adv-row p{grid-column:2}.sitem{grid-template-columns:1fr;gap:10px}.sitem .cols{grid-template-columns:1fr;gap:20px}.adv-row .num,.sitem .num{font-size:44px}}
+
+/* range rover start */
+.rr{display:grid;grid-template-columns:1fr 1.6fr;gap:60px;align-items:center}
+.rr-stage{position:relative;overflow:hidden;aspect-ratio:614/461;background:var(--deep);border:1px solid var(--line2)}
+.rr-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.62) saturate(.85) sepia(.12);transition:filter 1.2s}
+.rr-stage.on img{filter:brightness(.8) saturate(.95) sepia(.08)}
+.rr-car{position:absolute;inset:0;will-change:transform}
+.rr-stage.crank .rr-car{animation:crank .09s linear 12}
+.rr-stage.on .rr-car{animation:idle2 .11s linear infinite}
+.rr-stage.rev .rr-car{animation:revs .06s linear infinite}
+@keyframes crank{25%{transform:translate(.8px,-.6px) rotate(.08deg)}75%{transform:translate(-.8px,.5px) rotate(-.08deg)}}
+@keyframes idle2{50%{transform:translateY(.45px)}}
+@keyframes revs{25%{transform:translate(.6px,-.7px) rotate(.05deg)}75%{transform:translate(-.5px,.6px) rotate(-.05deg)}}
+.tail{position:absolute;border-radius:3px;mix-blend-mode:screen;opacity:0;transition:opacity .5s;background:radial-gradient(closest-side,rgba(255,60,40,.95),rgba(255,30,20,.45) 50%,transparent);filter:blur(1px)}
+.tail.halo{filter:blur(10px);background:radial-gradient(closest-side,rgba(255,40,30,.55),transparent)}
+.rr-stage.on .tail{opacity:1}
+.rr-stage.rev .tail{opacity:1}
+#smoke{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.ssbtn{position:absolute;left:5%;bottom:7%;width:clamp(96px,11vw,138px);aspect-ratio:1;border-radius:50%;padding:0;z-index:4;
+  background:repeating-conic-gradient(from 0deg,#f4f4f4 0 2deg,#9a9a9a 2deg 4deg);box-shadow:0 10px 30px rgba(0,0,0,.6),inset 0 0 0 2px rgba(0,0,0,.35),0 0 0 6px #141414,0 0 0 7px #2b2b2b;transition:transform .15s,box-shadow .4s}
+.ssbtn:before{content:"";position:absolute;inset:9%;border-radius:50%;background:radial-gradient(circle at 50% 50%,transparent 60%,rgba(0,0,0,.4) 61%),conic-gradient(from 200deg,#bbb,#fafafa,#888,#eee,#bbb);opacity:.55;mix-blend-mode:multiply}
+.ssbtn .face{position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle at 35% 28%,#3a3a3a,#0b0b0b 55%,#000);box-shadow:inset 0 2px 6px rgba(255,255,255,.12),inset 0 -6px 12px rgba(0,0,0,.8),0 0 0 2px #050505;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#f2f2f2;line-height:1.05}
+.ssbtn .face b{font-family:Arial,Helvetica,sans-serif!important;font-weight:700!important;font-size:clamp(13px,1.35vw,17px);letter-spacing:.02em}
+.ssbtn .face small{font-family:Arial,Helvetica,sans-serif;font-size:clamp(7px,.7vw,9px);letter-spacing:.06em;margin:2px 0;color:#ddd}
+.ssbtn .led{position:absolute;inset:13%;border-radius:50%;box-shadow:0 0 0 2px rgba(255,170,40,0);transition:box-shadow .5s}
+.ssbtn.on .led{box-shadow:0 0 0 2px rgba(255,178,60,.9),0 0 14px rgba(255,170,40,.8)}
+.ssbtn:active{transform:scale(.96)}
+.rr-hud{position:absolute;right:4%;top:6%;z-index:4;text-align:right}
+.rr-hud b{display:block;font-family:var(--disp);font-weight:900;font-size:clamp(34px,4vw,58px);line-height:.9;color:var(--gold2)}
+.rr-hud span{font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.22em;color:var(--mute);text-transform:uppercase}
+.rr-copy p{color:#cbbba1;margin-top:22px;max-width:44ch}
+.rr-copy .k{margin-top:30px;border-top:1px solid var(--line2)}
+.rr-copy .k div{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);font-size:16px}
+.rr-copy .k b{font-family:var(--disp);font-weight:800;font-size:22px;color:var(--gold2)}
+@media (max-width:1020px){.rr{grid-template-columns:1fr;gap:34px}}
+
+/* cutouts */
+.cut{position:relative;display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(60% 55% at 50% 58%,#3a2a1c,transparent 70%)}
+.cut img{position:relative;z-index:2;width:92%;height:auto;object-fit:contain;filter:drop-shadow(0 18px 18px rgba(0,0,0,.55)) drop-shadow(0 4px 4px rgba(0,0,0,.6))}
+.cut:after{content:"";position:absolute;z-index:1;left:12%;right:10%;bottom:7%;height:9%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.85),rgba(0,0,0,0));filter:blur(6px)}
+.photo.cut{aspect-ratio:4/3.4;padding-bottom:9%}
+.photo.cut img{transform:translateX(-6%) scale(1.02)}
+.photo.cut.in img{transform:none}
+.photo.cut:after{inset:auto 10% 8% 12%;border:0}
+.car .pic.cut{padding:0 0 8%}
+.car .pic.cut img{width:86%;height:auto;object-fit:contain;filter:drop-shadow(0 14px 14px rgba(0,0,0,.6)) brightness(.98)}
+.car:hover .pic.cut img{transform:scale(1.05) translateY(-2px);filter:drop-shadow(0 20px 18px rgba(0,0,0,.6))}
+.mpic.cut{display:flex;align-items:center}
+.mpic.cut img{position:relative;inset:auto;width:90%;height:auto;object-fit:contain;margin:auto}
+.strip figure.cut{aspect-ratio:16/9;background:radial-gradient(60% 60% at 50% 60%,#33251a,#1b130d 75%);padding-bottom:5%}
+.strip figure.cut img{width:82%;height:auto;object-fit:contain;filter:drop-shadow(0 20px 20px rgba(0,0,0,.6))}
+.rr-stage{aspect-ratio:16/10!important;background:radial-gradient(60% 55% at 45% 62%,#3a2a1c,var(--deep) 72%)!important}
+.rr-car{inset:auto!important;left:3%;top:9%;width:84%;aspect-ratio:1510/871}
+.rr-car img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:brightness(.82) drop-shadow(0 18px 18px rgba(0,0,0,.6))!important;z-index:2}
+.rr-stage.on .rr-car img{filter:brightness(1) drop-shadow(0 18px 18px rgba(0,0,0,.6))!important}
+.rr-car .tail{z-index:3}
+.rr-car:before{content:"";position:absolute;left:4%;right:0;bottom:-3%;height:12%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.9),transparent);filter:blur(8px);z-index:1}
+.ssbtn{left:4%!important;top:6%;bottom:auto!important}
+
+.eng-pic .hs{transform:translate(-50%,-50%) rotate(35deg) skewX(-10deg);display:block;padding:4px 8px}
+.eng-pic .hs .dot{display:none}
+.eng-pic .hs .pill{background:none!important;border:0!important;backdrop-filter:none;padding:0;font-family:var(--disp)!important;font-weight:900!important;font-size:clamp(20px,3vw,48px)!important;letter-spacing:.02em;line-height:1;color:rgba(255,236,225,.55)!important;mix-blend-mode:overlay;text-shadow:0 1px 0 rgba(0,0,0,.55),0 -1px 0 rgba(255,255,255,.25);transition:color .35s,text-shadow .35s,transform .35s}
+.eng-pic .hs .pill small{display:none}
+.eng-pic .hs:hover .pill{color:rgba(255,244,232,.95)!important;mix-blend-mode:normal}
+.eng-pic .hs.on .pill{color:#fff6ea!important;mix-blend-mode:normal;text-shadow:0 0 18px rgba(255,220,180,.8),0 0 2px #fff}
+.eng-pic .hs:after{content:"";position:absolute;left:8px;right:8px;bottom:-2px;height:2px;background:#fff6ea;transform:scaleX(0);transition:transform .4s;box-shadow:0 0 10px rgba(255,220,180,.8)}
+.eng-pic .hs.on:after,.eng-pic .hs:hover:after{transform:scaleX(1)}
+.eng-wrap.picked .hs:not(.on){opacity:1}
+.eng-wrap.picked .eng-pic img{filter:brightness(.7) contrast(1.1)!important;transform:none!important}
+
+.eng-wrap{display:block!important;position:relative;min-height:0!important;border:1px solid var(--line2)}
+.eng-pic{position:relative;aspect-ratio:1200/631;margin-left:auto;width:100%}
+.eng-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.eng-pic .vig{background:linear-gradient(90deg,rgba(18,12,8,.95) 0%,rgba(18,12,8,.7) 26%,transparent 45%),radial-gradient(80% 80% at 60% 40%,transparent 50%,rgba(0,0,0,.6))!important}
+.quiz{position:absolute!important;left:0;top:0;bottom:0;width:34%;border-left:0!important;background:none!important;z-index:5;overflow:auto}
+@media (max-width:1020px){.quiz{position:relative!important;width:auto;background:linear-gradient(180deg,#2a1e14,#1b130d)!important;border-top:1px solid var(--line2)}.eng-pic .vig{background:radial-gradient(80% 80% at 60% 40%,transparent 50%,rgba(0,0,0,.6))!important}}
+@media (max-width:640px){.hero h1{font-size:8.4vw!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Sari la conținut</a>
+
+<div id="loader" aria-hidden="true">
+  <div class="lg gold-text">ICM</div>
+  <div class="bar"><i id="pbar"></i></div>
+  <div class="mono" id="pct">0%</div>
+</div>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#top" class="logo" aria-label="ICM International acasă">
+      <span class="mk"><span>ICM</span></span>
+      <span><b>ICM INTERNATIONAL</b><small>ÎNMATRICULĂRI · CEHIA</small></span>
+    </a>
+    <nav class="links" aria-label="Principal">
+      <a href="#de-ce-noi">De ce noi</a>
+            <a href="#calculator">Calculator</a>
+            <a href="#de-ce">De ce Cehia</a>
+      <a href="#servicii">Servicii</a>
+    </nav>
+    <div class="icons">
+      <a class="ic" href="https://www.instagram.com/icm.international/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+      <a class="ic" href="https://www.tiktok.com/@icm.international" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3c.4 2.2 1.8 3.7 4 4v3.1c-1.5 0-2.8-.4-4-1.2v6.2A6 6 0 1 1 10.5 9v3.2a2.9 2.9 0 1 0 2.9 2.9V3h3.2z"/></svg></a>
+      <a class="btn btn-gold" href="#dosar">Consultanță</a>
+      <button class="burger" id="burger" aria-label="Meniu"><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<div id="mmenu" aria-hidden="true">
+  <button id="mclose" aria-label="Închide">✕</button>
+  <a class="mi" href="#top"><span>00</span>Acasă</a>
+  <a class="mi" href="#servicii"><span>01</span>Servicii</a>
+  <a class="mi" href="#calculator"><span>02</span>Calculator</a>
+  <a class="mi" href="#de-ce-noi"><span>03</span>De ce noi</a>
+  <a class="mi" href="#dosar"><span>04</span>Contact</a>
+  <div style="margin-top:auto" class="mono">0742 625 411 · @icm.international</div>
+</div>
+
+<main id="main">
+<!-- HERO -->
+<section class="hero" id="top" data-l="0">
+  <div class="hero-stick">
+    <div class="hero-bg"></div>
+    <div class="car-frame" id="carFrame">
+      <img src="img/phantom.jpg" alt="Rolls-Royce Phantom pe un drum de munte" id="rollsImg">
+      <!-- headlights (positions in % of photo) -->
+      <i class="lamp beam"  style="left:14%;top:42%;width:26%;height:15%"></i>
+      <i class="lamp beam"  style="left:39%;top:42%;width:28%;height:15%"></i>
+      <i class="lamp flare" style="left:22%;top:38.5%;width:10%;height:8%"></i>
+      <i class="lamp flare" style="left:44%;top:39.5%;width:12%;height:8%"></i>
+      <i class="lamp drl"   style="left:24.6%;top:41.6%;width:5%;height:1.6%"></i>
+      <i class="lamp drl"   style="left:46%;top:42.6%;width:7.4%;height:1.6%"></i>
+      <div class="fade-t"></div><div class="fade-b"></div>
+    </div>
+    <div style="position:absolute;inset:0;z-index:4;pointer-events:none;background:linear-gradient(90deg,rgba(18,12,8,.85) 0%,rgba(18,12,8,.45) 38%,transparent 62%),linear-gradient(0deg,rgba(18,12,8,.7),transparent 35%)"></div>
+    <div class="hero-copy">
+      <div class="eyebrow">Praga · Înmatriculări auto din toată Europa</div>
+      <h1 id="h1"><span class="l1">ICM</span><span class="l2 outline">International<span class="sq" style="-webkit-text-stroke:0"></span></span></h1>
+      <p class="lead" id="lead">Înmatriculăm în Cehia mașini din orice țară a Uniunii Europene — legal, discret și fără impozit auto anual pe autoturisme. Plus consultanță completă în impozite și taxe auto.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold" href="#calculator">Alege motorul <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <a class="btn btn-line" href="#de-ce-noi">De ce noi</a>
+      </div>
+    </div>
+    <div class="progress"><i id="prog"></i></div>
+    <div class="font-tag"><b id="fontName">Bodoni Moda</b><span class="mono">Scroll</span></div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div class="track" id="t1"></div></div>
+
+<!-- DE CE NOI -->
+<section class="sec" id="de-ce-noi">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eyebrow">De ce noi?</div><h2>Șapte motive <em class="g">să ne alegi.</em></h2></div>
+      <p>Înmatricularea în Cehia nu e un formular, e un dosar. Diferența o face cine îl duce până la capăt.</p>
+    </div>
+    <div class="adv" id="adv"></div>
+  </div>
+</section>
+
+<!-- LAW -->
+<section class="sec" id="despre">
+  <div class="wrap law">
+    <div class="reveal">
+      <div class="eyebrow">Legea ICM</div>
+      <p class="big" style="margin-top:30px">Nu căutăm portițe. <em>Folosim regulile Uniunii Europene</em> exact cum au fost scrise — iar în Cehia, autoturismele nu mai plătesc impozit rutier anual.</p>
+      <p class="t">Din 2022, legea cehă a eliminat impozitul rutier pentru autoturisme; rămân impozitate doar camioanele grele și remorcile lor. ICM International pregătește structura corectă, actele și înmatricularea, iar consultanța noastră îți arată, pe cifre, cât economisești și ce obligații ai.</p>
+      <div class="stats">
+        <div><b class="gold-text">0 Kč</b><span>impozit rutier anual pe autoturisme în Cehia</span></div>
+        <div><b class="gold-text">27</b><span>state UE din care aducem mașini</span></div>
+        <div><b class="gold-text">1</b><span>dosar, un singur interlocutor</span></div>
+      </div>
+    </div>
+    <figure class="photo cut reveal">
+      <img src="img/bentley-cut.webp" alt="Bentley Mulsanne albastru închis" loading="lazy">
+      <figcaption class="mono" style="color:#f2ede4;top:26px;bottom:auto">Dosar Nº 001 · Bentley Mulsanne</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ENGINE CONFIGURATOR -->
+<section class="sec" id="calculator" style="background:linear-gradient(180deg,var(--bg),#0a0806 50%,var(--bg))">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eyebrow">Studio</div><h2>Calculează <em class="g">înainte să decizi.</em></h2></div>
+      <p>Alege motorul direct pe imagine. Răspunde la câteva întrebări și vezi impozitul din România față de Cehia.</p>
+    </div>
+    <div class="eng-wrap reveal" id="engWrap">
+      <div class="eng-pic">
+        <img src="img/engine.jpg" alt="Motor V12 sub capotă" loading="lazy">
+        <div class="vig"></div>
+        
+        <button class="hs" data-e="V4"  style="left:35%;top:31.5%"><span class="dot"></span><span class="pill">V4<small>~2.0 L</small></span></button>
+        <button class="hs" data-e="V6"  style="left:44%;top:46%"><span class="dot"></span><span class="pill">V6<small>~3.0 L</small></span></button>
+        <button class="hs" data-e="V8"  style="left:61.5%;top:23.5%"><span class="dot"></span><span class="pill">V8<small>~4.0 L</small></span></button>
+        <button class="hs" data-e="V10" style="left:68.3%;top:32.5%"><span class="dot"></span><span class="pill">V10<small>~5.2 L</small></span></button>
+        <button class="hs" data-e="V12" style="left:75%;top:41.5%"><span class="dot"></span><span class="pill">V12<small>~6.5 L</small></span></button>
+      </div>
+      <div class="quiz" id="quiz">
+        <div class="qhead"><span class="mono" id="qLbl">Chestionar</span><div class="qdots" id="qdots"><i></i><i></i><i></i><i></i><i></i></div></div>
+
+        <div class="qempty" id="q0">
+          <div class="big">Atinge un motor <em class="g">pe imagine.</em></div>
+          <p style="color:var(--mute);font-size:14.5px">V4, V6, V8, V10 sau V12. Chestionarul pornește imediat după alegere.</p>
+          <div class="chips" id="engChips"></div>
+        </div>
+
+        <div class="qstep" data-q="1">
+          <span class="mono" style="color:var(--gold)">Întrebarea 1 / 4</span>
+          <h3>Care e capacitatea exactă?</h3>
+          <p class="s">O găsești în cartea mașinii, la rubrica P.1.</p>
+          <div class="field"><label for="cc">Cilindree <b id="ccV">—</b></label><input type="range" id="cc" min="1000" max="7000" step="1" value="2000"></div>
+        </div>
+
+        <div class="qstep" data-q="2">
+          <span class="mono" style="color:var(--gold)">Întrebarea 2 / 4</span>
+          <h3>Ce normă de poluare are?</h3>
+          <div class="opts" id="optEuro">
+            <button class="opt" data-v="3">Euro 6<small>Cele mai multe după 2015</small></button>
+            <button class="opt" data-v="2">Euro 5<small>~2010–2015</small></button>
+            <button class="opt" data-v="1">Euro 4<small>~2006–2010</small></button>
+            <button class="opt" data-v="0">Non-Euro – Euro 3<small>Clasice, colecție</small></button>
+            <button class="opt" data-v="4" style="grid-column:1/-1">Hibrid<small>Peste 50 g CO₂/km</small></button>
+          </div>
+        </div>
+
+        <div class="qstep" data-q="3">
+          <span class="mono" style="color:var(--gold)">Întrebarea 3 / 4</span>
+          <h3>Unde e mașina acum?</h3>
+          <div class="opts" id="optTara">
+            <button class="opt" data-v="România">România</button>
+            <button class="opt" data-v="Germania">Germania</button>
+            <button class="opt" data-v="Italia">Italia</button>
+            <button class="opt" data-v="Franța">Franța</button>
+            <button class="opt" data-v="Austria">Austria</button>
+            <button class="opt" data-v="Altă țară UE">Altă țară UE</button>
+          </div>
+        </div>
+
+        <div class="qstep" data-q="4">
+          <span class="mono" style="color:var(--gold)">Întrebarea 4 / 4</span>
+          <h3>Pe câți ani vrei calculul?</h3>
+          <div class="field"><label for="yrs">Perioadă <b id="yrsV">5 ani</b></label><input type="range" id="yrs" min="1" max="10" step="1" value="5"></div>
+          <div class="field"><label for="loc">Cotă adițională primărie <b id="locV">0%</b></label><input type="range" id="loc" min="0" max="50" step="1" value="0"></div>
+        </div>
+
+        <div class="qstep res" data-q="5">
+          <span class="mono" style="color:var(--gold)" id="rTitle">Rezultat</span>
+          <div class="cmp">
+            <div><span>România / an</span><b id="roY">—</b><small class="note" id="roF"></small></div>
+            <div><span>Cehia / an</span><b class="gold-text">0 lei</b><small class="note">impozit rutier autoturisme</small></div>
+          </div>
+          <div class="save"><span class="mono">Economie în <span id="yrsT">5 ani</span></span><b class="gold-text" id="saveV">0 lei</b></div>
+          <button class="btn btn-gold" id="sendQ" style="justify-content:center">Trimite pe WhatsApp</button>
+          <p class="note">Estimare orientativă după nivelurile de bază din Codul Fiscal 2026 (lei / 200 cmc sau fracțiune). Nu include costurile procedurii. Fiecare caz se analizează individual.</p>
+        </div>
+
+        <div class="qnav" id="qnav" style="display:none">
+          <button class="qback" id="qBack">← Înapoi</button>
+          <button class="btn btn-gold" id="qNext">Continuă</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec" id="de-ce">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eyebrow">Anatomia impozitului</div><h2>De ce motoarele mari <em class="g">plătesc dublu?</em></h2></div>
+      <p>Din 2026, impozitul din România se calculează pe fiecare 200 cmc, după cilindree și norma Euro. Peste 2.000 cmc, sumele sar abrupt.</p>
+    </div>
+    <div class="why">
+      <div class="bars reveal">
+        <div class="mono" style="margin-bottom:18px">Lei / 200 cmc · România 2026</div>
+        <div class="chips" id="norms"></div>
+        <div id="barRows"></div>
+        <p class="note" style="margin-top:18px">Nivel de bază din Codul Fiscal 2026. Primăriile pot aplica cote adiționale locale.</p>
+      </div>
+      <div class="layers reveal" id="layers"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<section class="reveal">
+  <div class="strip">
+    <figure class="cut"><img src="img/porsche-cut.webp" alt="Porsche 911 gri" loading="lazy"><figcaption><span class="mono" style="color:var(--gold2)">Dosar Nº 014</span><b>Porsche 911</b></figcaption></figure>
+    <figure class="cut"><img src="img/rangerover-cut.webp" alt="Range Rover negru" loading="lazy"><figcaption><span class="mono" style="color:var(--gold2)">Dosar Nº 027</span><b>Range Rover</b></figcaption></figure>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section class="sec" id="intrebari">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eyebrow">Jurnal</div><h2>Motor mare. <em class="g">Decizie mare.</em></h2></div>
+      <p>Ce trebuie să știi înainte să cumperi un V8 sau un V12.</p>
+    </div>
+    <div class="arts">
+      <article class="art reveal"><span class="mono" style="color:var(--gold)">V8 · V10 · V12</span><h3>Plăcerea are cilindri. Statul îi numără.</h3><p>Un V12 de 6,75 litri înseamnă 34 de fracțiuni de 200 cmc. În România, din 2026, fiecare fracțiune peste 3.000 cmc costă între 275 și 319 lei la nivel de bază — adică aproape 10.000 de lei pe an, an de an, chiar dacă mașina stă în garaj toată iarna.</p></article>
+      <article class="art reveal"><span class="mono" style="color:var(--gold)">Cehia</span><h3>De ce tocmai Cehia?</h3><p>Pentru că legea cehă a eliminat impozitul rutier pentru autoturisme din 2022. E stat membru UE, numerele sunt valabile oriunde în Europa, iar procedura e predictibilă când ai pe cineva care o cunoaște din interior.</p></article>
+      <article class="art reveal"><span class="mono" style="color:var(--gold)">Lux & supercar</span><h3>Bentley, Rolls, Ferrari: costul ascuns.</h3><p>La mașinile de lux, impozitul anual e doar începutul: pentru mașinile noi de peste 75.000 €, România adaugă o majorare în primii ani. Fă calculul complet cu noi înainte să semnezi — uneori economia acoperă costul procedurii din primul an.</p></article>
+    </div>
+    <div class="faq" id="faq"></div>
+  </div>
+</section>
+
+<!-- SERVICES LIST -->
+<section class="sec" id="servicii">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eyebrow">Servicii</div><h2>Tot dosarul, <em class="g">de la A la Z.</em></h2></div>
+      <p>Fiecare serviciu poate fi luat separat sau ca pachet complet. Prima discuție și calculul de economie sunt gratuite.</p>
+    </div>
+    <div class="slist" id="slist"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec" id="dosar" style="padding-top:40px">
+  <div class="wrap">
+    <div class="newf reveal">
+      <div>
+        <div class="eyebrow">★ Dosar nou</div>
+        <h2 style="margin-top:24px">Mașina ta e <em class="g">următoarea?</em></h2>
+        <div class="st3">
+          <div><span>i.</span><div><b>Ne scrii</b><p>Marca, modelul, cilindreea și țara în care e acum mașina.</p></div></div>
+          <div><span>ii.</span><div><b>Primești analiza</b><p>Calculul de impozite, pașii și costurile, fără surprize.</p></div></div>
+          <div><span>iii.</span><div><b>Plăcuțe cehești</b><p>Ne ocupăm de acte și înmatriculare. Tu doar conduci.</p></div></div>
+        </div>
+        <div style="margin-top:36px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-line" href="tel:+40742625411">0742 625 411</a>
+          <a class="btn btn-line" href="https://www.instagram.com/icm.international/" target="_blank" rel="noopener">@icm.international</a>
+        </div>
+      </div>
+      <form id="form" novalidate>
+        <div class="two"><input class="in" name="nume" placeholder="Nume" required><input class="in" name="tel" placeholder="Telefon" required></div>
+        <div class="two"><input class="in" name="masina" id="fMasina" placeholder="Mașina"><input class="in" name="tara" id="fTara" placeholder="Țara actuală"></div>
+        <textarea class="in" name="msg" id="fMsg" placeholder="Detalii — cilindree, an, normă Euro, întrebări fiscale"></textarea>
+        <button class="btn btn-gold" type="submit" style="width:100%;justify-content:center;margin-top:18px">Deschide dosarul pe WhatsApp</button>
+        <p class="ok" id="ok">Mesajul e gata. Dacă WhatsApp nu s-a deschis, sună direct: 0742 625 411.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap reveal">
+    <div class="eyebrow" style="justify-content:center">ICM International</div>
+    <h2 style="margin-top:26px">Fără impozit<span class="sq"></span><br><em class="g">Legal.</em></h2>
+    <p>Înmatriculări auto în Cehia pentru mașini din toată Europa și consultanță în impozite și taxe auto.</p>
+    <a class="btn btn-gold" href="#dosar">Programează consultanța</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a href="#top" class="logo"><span class="mk"><span>ICM</span></span><span><b>ICM INTERNATIONAL</b><small>ÎNMATRICULĂRI · CEHIA</small></span></a>
+        <p>Înmatriculăm mașini din toată Europa în Cehia și oferim consultanță în impozite și taxe auto.</p>
+      </div>
+      <div><h4>Servicii</h4><a href="#servicii">Înmatriculare CZ</a><a href="#servicii">Consultanță fiscală</a><a href="#servicii">Firmă & leasing CZ</a><a href="#servicii">Transfer & radiere</a></div>
+      <div><h4>Explorează</h4><a href="#calculator">Calculator</a><a href="#garaj">Garaj</a><a href="#de-ce">De ce Cehia</a><a href="#intrebari">Întrebări</a></div>
+      <div><h4>Contact</h4>
+        <a href="tel:+40742625411">0742 625 411</a>
+        <a href="https://wa.me/40742625411" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://www.instagram.com/icm.international/" target="_blank" rel="noopener">Instagram · icm.international</a>
+        <a href="https://www.facebook.com/search/top?q=ICM%20Cehia" target="_blank" rel="noopener">Facebook · ICM Cehia</a>
+        <a href="https://www.tiktok.com/@icm.international" target="_blank" rel="noopener">TikTok · icm.international</a>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 ICM International. Toate drepturile rezervate.</span>
+      <span>Informațiile au caracter general și nu înlocuiesc analiza individuală a cazului tău.</span>
+      <span>Fără cookie-uri</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/40742625411" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3z"/></svg></a>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+/* ---------- tax data (Cod Fiscal 2026, lei / 200 cmc) ---------- */
+const RATES=[
+ {max:1600,lbl:"≤ 1.600",r:[19.5,18.8,17.6,16.5,16.2]},
+ {max:2000,lbl:"1.601–2.000",r:[29.7,28.5,26.7,25.1,24.6]},
+ {max:2600,lbl:"2.001–2.600",r:[92.2,88.6,82.8,77.8,76.3]},
+ {max:3000,lbl:"2.601–3.000",r:[182.9,172.8,154.1,151.2,149.8]},
+ {max:1e9,lbl:"peste 3.000",r:[319.0,297.3,294.4,290.0,275.5]}
+];
+const NORMS=["Non-Euro–E3","Euro 4","Euro 5","Euro 6","Hibrid"];
+const tax=(cc,n,loc)=>{const b=RATES.find(x=>cc<=x.max),f=Math.ceil(cc/200);return{f,rate:b.r[n],total:f*b.r[n]*(1+(loc||0)/100)}};
+const fmt=v=>Math.round(v).toLocaleString('ro-RO')+" lei";
+
+/* ---------- HERO: headlights + font morph on scroll ---------- */
+const hero=$("top"),h1=$("h1"),frame=$("carFrame"),img=$("rollsImg");
+const FONTS=[["Bodoni Moda","'Bodoni Moda',serif","-0.01em","400"],["Cinzel","'Cinzel',serif","0.04em","500"],["Italiana","'Italiana',serif","0.02em","400"],["Big Shoulders","'Big Shoulders Display',sans-serif","-0.005em","900"]];
+let fIdx=-1,lightsOn=false;
+function setFont(i){if(i===fIdx)return;fIdx=i;h1.style.opacity=.2;setTimeout(()=>{h1.style.setProperty("font-family",FONTS[i][1],"important");h1.style.letterSpacing=FONTS[i][2];h1.style.setProperty("font-weight",FONTS[i][3],"important");$("fontName").textContent=FONTS[i][0];h1.style.opacity=1},140)}
+function heroScroll(){
+  const r=hero.getBoundingClientRect(),total=hero.offsetHeight-innerHeight;
+  const p=Math.min(1,Math.max(0,-r.top/total));
+  $("prog").style.setProperty("--p",(p*100)+"%");$("prog").style.width=(p*100)+"%";
+  if(lightsOn){img.style.setProperty("--br",(0.66+p*0.3).toFixed(3))}
+  frame.style.transform=`translateX(-50%) scale(${1+p*.08})`;
+  setFont(p<.12?0:p<.24?1:p<.36?2:3);
+  $("lead").style.setProperty("--lo",Math.min(1,.55+p*2).toFixed(2));
+}
+function ignite(){ // DRL first, then full lights + brighten
+  setTimeout(()=>{hero.dataset.l="1";img.style.setProperty("--br",".3")},250);
+  setTimeout(()=>{hero.dataset.l="2";lightsOn=true;img.style.setProperty("--br",".66");$("lead").style.setProperty("--lo",".55")},1300);
+}
+addEventListener("scroll",heroScroll,{passive:true});addEventListener("resize",heroScroll);
+setFont(0);
+
+/* ---------- ticker ---------- */
+const t1=["Înmatriculare în Cehia","Consultanță impozite auto","Rolls-Royce","Bentley","Ferrari","Lamborghini","Porsche","Mercedes-Maybach"];
+$("t1").innerHTML=[...t1,...t1].map(x=>`<span>${x}</span>`).join("");
+
+/* ---------- de ce noi ---------- */
+const ADV=[
+ ["Specializați pe Cehia","Nu facem de toate. Ne ocupăm de înmatriculări auto în Cehia și de fiscalitate auto, așa că știm procedura, actele și termenele din interior — fără drumuri inutile și fără surprize la ghișeu."],
+ ["Calculul vine înaintea costului","Înainte să plătești ceva, primești o analiză pe cifrele tale: cât te costă mașina pe an în România, cât în Cehia și în cât timp se amortizează procedura. Dacă nu merită, îți spunem direct."],
+ ["Un singur interlocutor","De la prima întrebare până la plăcuțele pe mașină vorbești cu aceeași echipă. Noi coordonăm actele, traducerile, asigurarea și programările; tu primești doar statusul."],
+ ["Mașini din toată Europa","Indiferent dacă mașina e în România, Germania, Italia, Franța sau altă țară UE, ne ocupăm de radiere, transferul documentelor și înmatricularea finală în Cehia."],
+ ["Consultanță fiscală reală","Pe lângă înmatriculare, te ajutăm cu TVA intracomunitar, import, impozite, leasing și vânzarea ulterioară. Primești răspunsuri clare, nu formulări vagi."],
+ ["Discreție pentru mașini de lux","Lucrăm frecvent cu Rolls-Royce, Bentley, Ferrari, Lamborghini și mașini de colecție. Datele tale și ale mașinii rămân confidențiale, iar comunicarea e directă."],
+ ["Transparență totală","Îți spunem din start și obligațiile, nu doar avantajele: ce condiții trebuie îndeplinite, ce costuri apar și ce trebuie să respecți după înmatriculare. Totul în scris, în română."]
+];
+$("adv").innerHTML=ADV.map((a,i)=>`<div class="adv-row reveal"><span class="num">${String(i+1).padStart(2,"0")}</span><h3>${a[0]}</h3><p>${a[1]}</p></div>`).join("");
+
+/* ---------- services list ---------- */
+const SV=[
+ ["Înmatriculare auto în Cehia",["Preluăm mașina ta — nouă sau second-hand, din orice țară a Uniunii Europene — și o înmatriculăm în Cehia, cu talon ceh și numere CZ valabile în toată Europa.","Verificăm din timp documentele, omologarea și inspecția tehnică, pregătim dosarul complet și ne ocupăm de depunerea lui, ca procesul să meargă fără întoarceri."],["Verificarea documentelor mașinii","Inspecție tehnică și omologare în Cehia","Talon ceh și plăcuțe de înmatriculare","Predare acte și plăcuțe la cheie"]],
+ ["Consultanță în impozite auto",["Analizăm situația ta concretă: mașina, cilindreea, norma Euro, țara de rezidență și modul de utilizare. Pe baza lor calculăm impozitul anual în România față de Cehia și economia pe mai mulți ani.","Primești un raport clar, cu cifre și pași, ca să decizi informat — chiar dacă la final alegi să nu înmatriculezi mașina în Cehia."],["Calcul impozit RO vs CZ","Analiza costurilor totale ale procedurii","Termen de amortizare","Recomandare scrisă, pe cazul tău"]],
+ ["Firmă, leasing & structura de deținere",["Pentru ca înmatricularea în Cehia să fie făcută corect, mașina trebuie deținută printr-o structură potrivită. Te consiliem asupra variantelor legale — firmă cehă, leasing sau alte forme — și asupra obligațiilor fiecăreia.","Colaborăm cu specialiști locali pentru partea juridică și contabilă, ca totul să fie conform legislației cehe și europene."],["Analiza variantelor de deținere","Înființare sau utilizare structură CZ","Contracte de leasing / închiriere","Obligații contabile și fiscale explicate"]],
+ ["Acte, RCA, traduceri & plăcuțe",["Ne ocupăm de toată partea administrativă: traduceri autorizate, certificate de conformitate, asigurare RCA cehă, cartea verde și orice document cerut de autorități.","Tu nu stai la cozi și nu completezi formulare în limba cehă — primești totul gata, într-un singur dosar."],["Traduceri autorizate","Certificat de conformitate (COC)","Asigurare RCA cehă + carte verde","Arhivă digitală a documentelor"]],
+ ["Transfer & radiere din toată Europa",["Dacă mașina e deja înmatriculată în România, Germania, Italia, Franța, Austria, Spania sau altă țară UE, ne ocupăm de radierea ei de acolo și de transferul documentelor în Cehia.","Coordonăm termenele astfel încât mașina să stea cât mai puțin fără numere și să poți circula legal în tot acest timp."],["Radiere din țara de origine","Numere provizorii, unde e cazul","Transport documente","Coordonarea tuturor termenelor"]],
+ ["Taxe, TVA & import la achiziție",["Cumperi o mașină din altă țară? Te ajutăm să înțelegi TVA-ul intracomunitar, regimul de import pentru mașinile din afara UE și taxele care apar la achiziție.","Planificarea corectă înainte de cumpărare poate face o diferență mare la mașinile de lux, unde fiecare procent contează."],["TVA intracomunitar","Import din afara UE","Verificare factură și acte de vânzare","Optimizarea legală a costurilor"]],
+ ["Consultanță la achiziția mașinii de lux",["Înainte să semnezi pentru un Rolls-Royce, Bentley, Ferrari sau Lamborghini, îți facem calculul complet al costului de deținere: impozite, asigurare, înmatriculare și eventuale majorări pentru mașinile noi de peste 75.000 €.","Astfel știi exact cât te costă mașina pe an, nu doar cât costă la cumpărare."],["Cost total de deținere pe 1–10 ani","Comparație RO vs CZ","Verificarea documentelor mașinii","Recomandare înainte de semnare"]],
+ ["Vânzare & reînmatriculare ulterioară",["Planurile se schimbă. Dacă vrei să vinzi mașina sau să o readuci în România, te ajutăm cu radierea din Cehia, transferul documentelor și obligațiile fiscale care apar.","Îți spunem din timp ce implică ieșirea din structura cehă, ca să nu existe surprize."],["Radiere din Cehia","Reînmatriculare în RO sau altă țară","Obligații fiscale la vânzare","Transfer de proprietate"]]
+];
+$("slist").innerHTML=SV.map((s,i)=>`<article class="sitem reveal"><span class="num">${String(i+1).padStart(2,"0")}</span><div><h3>${s[0]}</h3><div class="cols"><div>${s[1].map(p=>`<p>${p}</p>`).join("")}<a class="go" href="#dosar" data-svc="${s[0]}">Cere ofertă</a></div><div><span class="k">Ce include</span><ul>${s[2].map(x=>`<li>${x}</li>`).join("")}</ul></div></div></div></article>`).join("");
+document.querySelectorAll("[data-svc]").forEach(a=>a.addEventListener("click",()=>{$("fMsg").value="Sunt interesat de: "+a.dataset.svc+". "}));
+
+
+/* ---------- ENGINE QUIZ ---------- */
+const ENG={V4:{cc:1998,min:1000,max:2500},V6:{cc:2995,min:2400,max:3800},V8:{cc:3996,min:3500,max:6800},V10:{cc:5204,min:4800,max:5500},V12:{cc:6496,min:5500,max:7000}};
+const Q={eng:null,cc:0,euro:3,tara:"",yrs:5,loc:0};let step=0;
+const wrap=$("engWrap"),hs=[...document.querySelectorAll(".hs")];
+$("engChips").innerHTML=Object.keys(ENG).map(k=>`<button class="chip" data-e="${k}">${k}</button>`).join("");
+function pickEngine(e){
+  Q.eng=e;const d=ENG[e];Q.cc=d.cc;
+  const cc=$("cc");cc.min=d.min;cc.max=d.max;cc.value=d.cc;$("ccV").textContent=d.cc.toLocaleString('ro-RO')+" cmc";
+  hs.forEach(h=>h.classList.toggle("on",h.dataset.e===e));wrap.classList.add("picked");
+  $("qLbl").textContent="Motor "+e;go(1);
+}
+hs.forEach(h=>h.onclick=()=>pickEngine(h.dataset.e));
+$("engChips").querySelectorAll(".chip").forEach(c=>c.onclick=()=>pickEngine(c.dataset.e));
+function go(n){
+  step=n;$("q0").style.display=n===0?"flex":"none";
+  document.querySelectorAll(".qstep").forEach(s=>s.classList.toggle("on",+s.dataset.q===n));
+  [...$("qdots").children].forEach((d,i)=>d.classList.toggle("on",i<n));
+  $("qnav").style.display=n>0?"flex":"none";
+  $("qNext").style.display=(n===5)?"none":"inline-flex";
+  $("qNext").textContent=n===4?"Vezi rezultatul":"Continuă";
+  if(n===5)result();
+  if(n>0&&innerWidth<=1020)$("quiz").scrollIntoView({behavior:"smooth",block:"start"});
+}
+$("qNext").onclick=()=>{if(step===2&&Q.euro==null)return;if(step===3&&!Q.tara){Q.tara="România"}go(step+1)};
+$("qBack").onclick=()=>{if(step===1){wrap.classList.remove("picked");hs.forEach(h=>h.classList.remove("on"));$("qLbl").textContent="Chestionar";go(0)}else go(step-1)};
+$("cc").oninput=e=>{Q.cc=+e.target.value;$("ccV").textContent=Q.cc.toLocaleString('ro-RO')+" cmc"};
+function optGroup(id,key,num,auto){$(id).querySelectorAll(".opt").forEach(o=>o.onclick=()=>{$(id).querySelectorAll(".opt").forEach(x=>x.classList.toggle("on",x===o));Q[key]=num?+o.dataset.v:o.dataset.v;if(auto)setTimeout(()=>go(step+1),280)})}
+optGroup("optEuro","euro",true,true);optGroup("optTara","tara",false,true);
+$("optEuro").querySelector('[data-v="3"]').classList.add("on");
+$("yrs").oninput=e=>{Q.yrs=+e.target.value;$("yrsV").textContent=Q.yrs+(Q.yrs===1?" an":" ani")};
+$("loc").oninput=e=>{Q.loc=+e.target.value;$("locV").textContent=Q.loc+"%"};
+let raf;function animate(el,to){cancelAnimationFrame(raf);const t0=performance.now();const st=t=>{const k=Math.min(1,(t-t0)/1100),e=1-Math.pow(1-k,3);el.textContent=fmt(to*e);if(k<1)raf=requestAnimationFrame(st)};raf=requestAnimationFrame(st)}
+function result(){
+  const r=tax(Q.cc,Q.euro,Q.loc);
+  $("rTitle").textContent=`${Q.eng} · ${Q.cc.toLocaleString('ro-RO')} cmc · ${NORMS[Q.euro]}`;
+  $("roY").textContent=fmt(r.total);
+  $("roF").textContent=`${r.f} fracțiuni × ${r.rate.toFixed(1).replace(".",",")} lei${Q.loc?` + ${Q.loc}%`:""}`;
+  $("yrsT").textContent=Q.yrs+(Q.yrs===1?" an":" ani");
+  animate($("saveV"),r.total*Q.yrs);
+}
+$("sendQ").onclick=()=>{const r=tax(Q.cc,Q.euro,Q.loc);
+  const t=`Bună ziua ICM International!\nMotor: ${Q.eng}, ${Q.cc} cmc, ${NORMS[Q.euro]}\nȚara actuală: ${Q.tara||"-"}\nImpozit RO estimat: ${fmt(r.total)}/an\nVreau o analiză pentru înmatricularea în Cehia.`;
+  openWA(t)};
+function openWA(t){const a=document.createElement("a");a.href="https://wa.me/40742625411?text="+encodeURIComponent(t);a.target="_blank";a.rel="noopener";document.body.appendChild(a);a.click();a.remove()}
+
+/* ---------- bars + layers ---------- */
+let norm=3;
+$("norms").innerHTML=NORMS.map((n,i)=>`<button class="chip ${i===3?'on':''}" data-n="${i}">${n}</button>`).join("");
+$("barRows").innerHTML=RATES.map(r=>`<div class="row"><span class="lbl">${r.lbl} cmc</span><div class="track2"><div class="fill"></div></div><span class="v"></span></div>`).join("");
+function drawBars(){$("barRows").querySelectorAll(".row").forEach((el,i)=>{const v=RATES[i].r[norm];el.querySelector(".fill").style.width=(v/319*100)+"%";el.querySelector(".v").textContent=v.toFixed(1).replace(".",",")})}
+$("norms").querySelectorAll(".chip").forEach(c=>c.onclick=()=>{norm=+c.dataset.n;$("norms").querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===c));drawBars()});
+const LY=[
+ ["Până la 2.000 cmc","16–30 lei","Mașinile mici și medii plătesc sume rezonabile. Aici înmatricularea în Cehia aduce economii mici."],
+ ["2.001–2.600 cmc","76–92 lei","Primul salt: de aproape trei ori mai mult pe fiecare 200 cmc față de grupa anterioară."],
+ ["2.601–3.000 cmc","150–183 lei","Al doilea salt. Un 3.0 diesel sau benzină ajunge deja la mii de lei pe an în România."],
+ ["Peste 3.000 cmc","275–319 lei","Zona V8, V10, V12. Un Rolls-Royce sau Bentley cu motor de 6 litri adună peste 30 de fracțiuni, fiecare taxată la maximum. Aici economia e cea mai mare."],
+ ["Mașini noi peste 75.000 €","+ majorare","Pentru mașinile noi cu preț de achiziție peste 75.000 €, România adaugă o majorare a impozitului în primii ani de utilizare."]
+];
+$("layers").innerHTML=LY.map((l,i)=>`<div class="layer ${i===3?'on':''}"><div class="hd"><b>${l[0]}</b><span>${l[1]}</span></div><div class="bd"><p>${l[2]}</p></div></div>`).join("");
+$("layers").querySelectorAll(".layer").forEach(l=>l.onclick=()=>$("layers").querySelectorAll(".layer").forEach(x=>x.classList.toggle("on",x===l&&!x.classList.contains("on"))));
+
+/* ---------- faq ---------- */
+const FQ=[
+ ["Este legal să înmatriculez mașina în Cehia?","Da, atunci când structura este făcută corect: Cehia este stat membru UE, iar înmatricularea se face conform legislației cehe. În consultanță îți explicăm exact condițiile și obligațiile care se aplică în cazul tău, inclusiv în țara în care locuiești."],
+ ["Chiar nu se plătește impozit anual în Cehia?","Pentru autoturisme, nu: din 2022 legea cehă a eliminat impozitul rutier pentru mașinile de persoane. Rămân impozitate doar camioanele grele și remorcile acestora."],
+ ["Din ce țări pot aduce mașina?","Din orice țară a Uniunii Europene — România, Germania, Italia, Franța, Austria, Spania, Belgia, Olanda și celelalte. Ne ocupăm noi de radiere, transfer și actele necesare."],
+ ["Pentru ce mașini merită cel mai mult?","Pentru motoarele mari, peste 2.600 și mai ales peste 3.000 cmc: Rolls-Royce, Bentley, Ferrari, Lamborghini, Mercedes-AMG, Range Rover, Porsche. Alege motorul în calculator pentru cifrele tale."],
+ ["Cât durează procedura?","Depinde de țara de proveniență și de acte. Îți dăm un termen clar după ce analizăm dosarul. Scrie-ne pe WhatsApp la 0742 625 411."],
+ ["Oferiți și doar consultanță fiscală?","Da. Poți apela la noi doar pentru consultanță în impozite și taxe auto — achiziție, TVA, import, impozit anual sau vânzare — chiar dacă nu înmatriculezi mașina în Cehia."]
+];
+$("faq").innerHTML=FQ.map(q=>`<div class="q reveal"><button aria-expanded="false">${q[0]}<i>+</i></button><div class="a"><p>${q[1]}</p></div></div>`).join("");
+$("faq").querySelectorAll(".q button").forEach(b=>b.onclick=()=>{const q=b.parentElement,on=!q.classList.contains("on");$("faq").querySelectorAll(".q").forEach(x=>{x.classList.remove("on");x.querySelector("button").setAttribute("aria-expanded","false")});if(on){q.classList.add("on");b.setAttribute("aria-expanded","true")}});
+
+/* ---------- form ---------- */
+$("form").addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.target);
+ openWA(`Bună ziua ICM International!\nNume: ${f.get("nume")||"-"}\nTelefon: ${f.get("tel")||"-"}\nMașina: ${f.get("masina")||"-"}\nȚara: ${f.get("tara")||"-"}\n${f.get("msg")||""}`);$("ok").style.display="block"});
+
+/* ---------- header, menu, reveal, loader ---------- */
+const hdr=$("hdr");addEventListener("scroll",()=>hdr.classList.toggle("solid",scrollY>innerHeight*2.6),{passive:true});
+const mm=$("mmenu");$("burger").onclick=()=>mm.classList.add("open");$("mclose").onclick=()=>mm.classList.remove("open");mm.querySelectorAll("a").forEach(a=>a.onclick=()=>mm.classList.remove("open"));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);if(e.target.classList.contains("bars"))drawBars()}}),{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+let p=0;const iv=setInterval(()=>{p=Math.min(100,p+Math.ceil(Math.random()*8));$("pct").textContent=p+"%";$("pbar").style.width=p+"%";if(p>=100){clearInterval(iv);setTimeout(()=>{$("loader").classList.add("done");ignite();heroScroll()},300)}},45);
+})();
+</script>
+</body>
+</html>
